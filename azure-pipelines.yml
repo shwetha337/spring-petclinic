@@ -16,15 +16,9 @@ stages:
   - job: Build
     displayName: Build Maven Project
     steps:
-    - task: Maven@4
-      displayName: 'Maven Package'
+    - task: HCLAppScanOnCloud@2
       inputs:
-        mavenPomFile: 'pom.xml'
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
-    - upload: $(Build.ArtifactStagingDirectory)
-      artifact: drop
+        AppSecTestService: 'shwe creds'
+        applications: '06671daf-d5a4-4ca5-b69e-ae1d439c86c2'
+        scanname: 'tt'
+        scantype: 'static'
